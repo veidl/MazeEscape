@@ -1,12 +1,31 @@
 //
-// Created by Thomas on 08/05/2020.
+//  maze.h
+//  MazeG
+//
+//  Created by Michael Strommer on 05.05.20.
+//  Copyright © 2020 Michael Strommer. All rights reserved.
 //
 
-#ifndef MAZEESCAPE_MAZE_H
-#define MAZEESCAPE_MAZE_H
+#ifndef _MAZE_H
+#define _MAZE_H
 
+// STRUKTUREN
+
+// DEFINES
+#define ROWS 10
+#define COLS 10
+
+enum {
+    NORTH, EAST, SOUTH, WEST
+}; // 0...3 optional
+
+// PROTOTYPEN
 void print(void);
 
 int escape(int row, int col);
 
-#endif //MAZEESCAPE_MAZE_H
+void init(char begin[ROWS][COLS]);
+//... weitere Hilfsfunktionen
+
+
+#endif /* maze_h */
