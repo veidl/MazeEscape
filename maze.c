@@ -11,6 +11,8 @@
 #include <memory.h>
 
 char maze[ROWS][COLS];
+char trail[ROWS][COLS];
+int DIRECTION = 0;
 
 // init function
 void init(char begin[ROWS][COLS]) {
@@ -28,24 +30,42 @@ void print() {
     }
 }
 
+int isAllowed(int row, int col) {
+    return maze[row][col] != '#'
+           && row < ROWS
+           && maze[row][col] != '#'
+           && col < COLS
+           && maze[row][col] != 'T'
+           && trail[row][col] != 'X';
+
+}
+
 // recursive escape algorithm using backtracking
 int escape(int row, int col) {
     print();
     // Abbruchbedingung
     if (maze[row][col] == 'T') {
-        printf("found it brah");
+        printf("found solution \n");
         return 1;
-    } else {
-        maze[row][col] = (char) ".";
-        return escape(row + 1, col + 1);
     }
-    // Allgemeine Rekursionsvorschrift
-    // Versuche nach Norden zu gehen
-    // --war der Weg nach Norden erfolgreich? "Rote Faden" zurückgehen
-    // Versuche nach Osten zu gehen
-    // Versuche nach...
+    // check if valid
+    if (isAllowed(row, col) == 1) {
+        maze[row][col] = '.';
+        trail[row][col] = 'X';
 
-    // Backtracking wenn kein Weg gangbar war...
-    // und ich kennzeichne Weg als Sackgasse
+        if (escape(row - 1, col)) {
+            return 1;
+        }
+        if (escape(row, col + 1)) {
+            return 1;
+        }
+        if (escape(row + 1, col)) {
+            return 1;
+        }
+        if (escape(row, col - 1)) {
+            return 1;
+        }
+        maze[row][col] = 'X';
+    }
     return 0;
 }

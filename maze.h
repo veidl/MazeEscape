@@ -16,13 +16,18 @@
 #define COLS 10
 
 enum {
-    NORTH, EAST, SOUTH, WEST
+    NORTH = 0,
+    EAST = 1,
+    SOUTH = 2,
+    WEST = 3
 }; // 0...3 optional
 
 // PROTOTYPEN
 void print(void);
 
 int escape(int row, int col);
+
+int isAllowed(int row, int col);
 
 void init(char begin[ROWS][COLS]);
 //... weitere Hilfsfunktionen
