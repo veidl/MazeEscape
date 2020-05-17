@@ -12,7 +12,6 @@
 
 char maze[ROWS][COLS];
 char trail[ROWS][COLS];
-int DIRECTION = 0;
 
 // init function
 void init(char begin[ROWS][COLS]) {
@@ -31,41 +30,55 @@ void print() {
 }
 
 int isAllowed(int row, int col) {
-    return maze[row][col] != '#'
-           && row < ROWS
-           && maze[row][col] != '#'
-           && col < COLS
-           && maze[row][col] != 'T'
-           && trail[row][col] != 'X';
-
+    return maze[row][col] != WALL
+           && trail[row][col] != DEAD_END
+           && trail[row][col] != START;
 }
 
 // recursive escape algorithm using backtracking
 int escape(int row, int col) {
     print();
     // Abbruchbedingung
-    if (maze[row][col] == 'T') {
-        printf("found solution \n");
+    if (maze[row][col] == EXIT) {
+        printf("found a way out \n");
         return 1;
     }
-    // check if valid
-    if (isAllowed(row, col) == 1) {
-        maze[row][col] = '.';
-        trail[row][col] = 'X';
 
+    // go north
+    if (isAllowed(row - 1, col) == 1) {
+        maze[row][col] = WAY;
+        trail[row][col] = DEAD_END;
         if (escape(row - 1, col)) {
             return 1;
         }
+    }
+    // go east
+    if (isAllowed(row, col + 1) == 1) {
+        maze[row][col] = WAY;
+        trail[row][col] = DEAD_END;
+
         if (escape(row, col + 1)) {
             return 1;
         }
+    }
+    // go south
+    if (isAllowed(row + 1, col) == 1) {
+        maze[row][col] = WAY;
+        trail[row][col] = DEAD_END;
         if (escape(row + 1, col)) {
             return 1;
         }
+    }
+    // go west
+    if (isAllowed(row, col - 1) == 1) {
+        maze[row][col] = WAY;
+        trail[row][col] = DEAD_END;
         if (escape(row, col - 1)) {
             return 1;
         }
-        maze[row][col] = 'X';
     }
+    maze[row][col] = DEAD_END;
+    trail[row][col] = DEAD_END;
+
     return 0;
 }

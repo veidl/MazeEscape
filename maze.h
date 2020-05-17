@@ -21,6 +21,9 @@ enum {
     SOUTH = 2,
     WEST = 3
 }; // 0...3 optional
+enum {
+    WALL = '#', DEAD_END = 'X', WAY = '.', EXIT = 'T', START = 'S'
+};
 
 // PROTOTYPEN
 void print(void);
