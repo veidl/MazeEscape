@@ -2,13 +2,14 @@
 //  maze.c
 //  MazeG
 //
-//  Created by Michael Strommer on 05.05.20.
-//  Copyright © 2020 Michael Strommer. All rights reserved.
+//  Created by Thomas Polzer
+//  Copyright © 2020 Thomas Polzer. All rights reserved.
 //
 
 #include "maze.h"
 #include <stdio.h>
 #include <memory.h>
+#include <zconf.h>
 
 char maze[ROWS][COLS];
 char trail[ROWS][COLS];
@@ -38,6 +39,7 @@ int isAllowed(int row, int col) {
 // recursive escape algorithm using backtracking
 int escape(int row, int col) {
     print();
+    sleep(1);
     // Abbruchbedingung
     if (maze[row][col] == EXIT) {
         printf("found a way out \n");

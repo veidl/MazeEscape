@@ -2,8 +2,8 @@
 //  maze.h
 //  MazeG
 //
-//  Created by Michael Strommer on 05.05.20.
-//  Copyright © 2020 Michael Strommer. All rights reserved.
+//  Created by Thomas Polzer
+//  Copyright © 2020 Thomas Polzer. All rights reserved.
 //
 
 #ifndef _MAZE_H
